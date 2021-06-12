@@ -8,9 +8,14 @@ a full-interaction event manager, help `three.js` binding interaction event more
 
 # install
 
+Types added for typescript. And build file removed. Add directly from git:
 ```sh
-npm install -S three.interaction
+npm install -S git+ssh://git@github.com:repalash/three.interaction.js.git#types
 ```
+
+Module augmentation for three.js classes seems not possible for now, see: https://github.com/mrdoob/three.js/issues/19468
+
+_TODO: maybe just export types as subclasses and force-cast when using._
 
 # usage
 
