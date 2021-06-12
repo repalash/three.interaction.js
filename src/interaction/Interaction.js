@@ -56,8 +56,7 @@ class Interaction extends InteractionManager {
    * @param {Number} [options.interactionFrequency=10] - Frequency increases the interaction events will be checked.
    */
   constructor(renderer, scene, camera, options) {
-    options = Object.assign({ autoAttach: false }, options);
-    super(renderer, scene, camera, options);
+    super(renderer, scene, camera, (options = Object.assign({ autoAttach: false }, options)));
 
     /**
      * a ticker
