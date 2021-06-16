@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/jasonChen1982/three.interaction.js#readme",
   "peerDependencies": {
-    "three": "^0.129.0"
+    "three": "file:./../three.js/"
   },
   "devDependencies": {
     "@pixi/jsdoc-template": "^2.2.0",
@@ -71,17 +71,11 @@
     "rollup": "^0.52.0",
     "rollup-plugin-babel": "^3.0.2",
     "standard-version": "^4.2.0",
-    "three": "^0.129.0",
+    "three": "file:./../three.js/",
     "typescript": "^4.3.2",
     "validate-commit-msg": "^2.14.0"
   },
   "config": {
-    "npmsrcify": {
-      "modules": [
-        "three"
-      ],
-      "output": "./examples/libs"
-    },
     "validate-commit-msg": {
       "types": [
         "feat",
