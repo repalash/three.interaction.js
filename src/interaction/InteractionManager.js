@@ -42,6 +42,7 @@ class InteractionManager extends EventDispatcher {
 
     options = options || {};
 
+    this.objectsToRaycast = null;
     /**
      * The renderer this interaction manager works for.
      *
@@ -958,6 +959,11 @@ class InteractionManager extends EventDispatcher {
     // through the scenegraph, but we know that there will be no more hits! So we can avoid extra hit tests
     // A final optimisation is that an object is not hit test directly if a child has already been hit.
 
+    // let xxxx = interactionEvent.intersects.filter(value => !value.object.type.includes("Helper"));
+    // if(xxxx.length && displayObject.interactive)
+    //   console.log(displayObject, xxxx, hitTest, interactionEvent.target, func)
+
+    // console.log(displayObject)
     interactive = displayObject.interactive || interactive;
 
     let hit = false;
@@ -1005,7 +1011,8 @@ class InteractionManager extends EventDispatcher {
       // has already been hit - but only if it was interactive, otherwise we need to keep
       // looking for an interactive child, just in case we hit one
       if (hitTest && !interactionEvent.target) {
-        if (interactionEvent.intersects[0] && interactionEvent.intersects[0].object === displayObject) {
+        let intersect = interactionEvent.intersects.find(value => value.object === displayObject);
+        if (intersect) {
           hit = true;
         }
       }
@@ -1604,9 +1611,24 @@ class InteractionManager extends EventDispatcher {
 
     interactionData.originalEvent = pointerEvent;
     interactionEvent._reset();
-    interactionEvent.intersects = this.raycaster.intersectObjects(this.scene.children, true);
+
+    if (this.objectsToRaycast) {
+      interactionEvent.intersects = this.raycaster.intersectObjects(this.objectsToRaycast, true);
+    } else {
+      interactionEvent.intersects = this.raycaster.intersectObjects(this.scene.children, true);
+    }
 
     return interactionEvent;
+  }
+
+  /**
+   * set objects to raycast
+   *
+   * @param {Object3D | null} objects
+   * @memberof InteractionManager
+   */
+  setObjectsToRaycast(objects) {
+    this.objectsToRaycast = objects;
   }
 
   /**

@@ -405,7 +405,14 @@ declare class InteractionManager extends EventDispatcher {
      *
      */
     destroy(): void;
-    private _tempPoint: any;
+
+    /**
+     * set objects to raycast
+     * @param {Object3D | null} objects
+     */
+     setObjectsToRaycast(objects: Object3D[]|any): void;
+
+     private _tempPoint: any;
 }
 import { EventDispatcher } from "three/src/core/EventDispatcher";
 import InteractionData from "./InteractionData";
